@@ -14,6 +14,6 @@
 
 **参考代码：**
 
-https://github.com/sungwon23/BSRNN (调整DPRNN)
+https://github.com/sungwon23/BSRNN （调整DPRNN）
 
 https://github.com/ruizhecao96/CMGAN （Metric GAN）

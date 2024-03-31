@@ -19,17 +19,11 @@
 数据样式：
 
 --VCTK-DEMAND/
-
   --train/
-  
     --noisy/
-    
     --clean/
-    
   --test/
-  
     --noisy/
-    
     --clean/
     
 **参考代码：**

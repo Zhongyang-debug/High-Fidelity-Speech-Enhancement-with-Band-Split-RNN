@@ -50,20 +50,20 @@ class DemandDataset(torch.utils.data.Dataset):
         return clean_ds, noisy_ds, length
 
 
-def load_data(ds_dir, batch_size, n_cpu, cut_len, rank):
+def load_data(ds_dir, batch_size, n_cpu, cut_len, rank, world_size):
 
-    # torchaudio.set_audio_backend("sox_io")         # in linux
+    # torchaudio.set_audio_backend("sox_io")  # in linux
 
     train_dir = os.path.join(ds_dir, 'train')
     test_dir = os.path.join(ds_dir, 'test')
 
     train_ds = DemandDataset(train_dir, cut_len)
     test_ds = DemandDataset(test_dir, cut_len)
-    train_sampler = DistributedSampler(dataset=train_ds, rank=rank) if torch.cuda.device_count() > 1 else None
-    test_sampler = DistributedSampler(dataset=test_ds, rank=rank) if torch.cuda.device_count() > 1 else None
+    train_sampler = DistributedSampler(dataset=train_ds, rank=rank) if world_size > 1 else None
+    test_sampler = DistributedSampler(dataset=test_ds, rank=rank) if world_size > 1 else None
     train_dataset = torch.utils.data.DataLoader(dataset=train_ds,
                                                 batch_size=batch_size,
-                                                shuffle=False if torch.cuda.device_count() > 1 else True,
+                                                shuffle=False if world_size > 1 else True,
                                                 sampler=train_sampler,
                                                 pin_memory=True if torch.cuda.is_available() else False,
                                                 drop_last=True,

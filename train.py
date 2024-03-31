@@ -246,7 +246,7 @@ def main(rank: int, world_size: int, args: list):
         )  # 初始化分布式环境
 
     device = torch.device('cuda:{:d}'.format(rank) if torch.cuda.is_available() else 'cpu')
-    train_ds, test_ds = dataloader.load_data(args.data_dir, args.batch_size, 4, args.cut_len, rank)
+    train_ds, test_ds = dataloader.load_data(args.data_dir, args.batch_size, 4, args.cut_len, rank, world_size)
     trainer = Trainer(train_ds, test_ds, args, rank, device)
     trainer.train()
 

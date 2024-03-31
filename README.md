@@ -3,11 +3,15 @@
 
 **相关领域应用情况**
 
-**音乐源分离**：
+**音乐源分离：**
 [Music Source Separation with Band-Split RNN](https://arxiv.org/abs/2209.15174)
 
-**语音增强**：
+**语音增强：**
 [High Fidelity Speech Enhancement with Band-Split RNN](https://arxiv.org/abs/2212.00406)
 
-**个性化语音增强**：
+**个性化语音增强：**
 [Personalized Speech Enhancement Combining Band-Split RNN and Speaker Attentive Module](https://export.arxiv.org/abs/2302.09953v1)
+
+**参考代码：**
+https://github.com/sungwon23/BSRNN
+https://github.com/ruizhecao96/CMGAN

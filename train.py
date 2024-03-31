@@ -282,7 +282,7 @@ if __name__ == '__main__':
                         help="cut length, default is 2 seconds in denoise and dereverberation")
     parser.add_argument("--data_dir",
                         type=str,
-                        default='D:/Audio_Project/Speech_Enhancement/Code/Speech_Enhancement/dataset',
+                        default='Speech_Enhancement/dataset',
                         help="dir of VCTK+DEMAND dataset")
     parser.add_argument("--save_model_dir",
                         type=str,

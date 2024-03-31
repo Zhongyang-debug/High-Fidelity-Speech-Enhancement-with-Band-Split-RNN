@@ -12,6 +12,19 @@
 个性化语音增强：
 [Personalized Speech Enhancement Combining Band-Split RNN and Speaker Attentive Module](https://export.arxiv.org/abs/2302.09953v1)
 
+**数据集**
+
+下载地址：https://datashare.ed.ac.uk/handle/10283/2791
+
+数据样式：
+--VCTK-DEMAND/
+  --train/
+    --noisy/
+    --clean/
+  --test/
+    --noisy/
+    --clean/
+
 **参考代码：**
 
 https://github.com/sungwon23/BSRNN （调整 DPRNN）

@@ -16,4 +16,4 @@
 
 https://github.com/sungwon23/BSRNN
 
-https://github.com/ruizhecao96/CMGAN
+https://github.com/ruizhecao96/CMGAN（Metric GAN）

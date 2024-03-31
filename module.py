@@ -11,9 +11,9 @@ class BandSplit(nn.Module):
         super(BandSplit, self).__init__()
 
         self.band = torch.Tensor(
-            [8, 8, 8, 8,
-             16, 16, 16, 16,
-             32, 32, 32, 32, 33]
+        [2,    3,    3,    3,    3,   3,   3,    3,    3,    3,   3,
+         8,    8,    8,    8,    8,   8,   8,    8,    8,    8,   8,   8,
+         16,   16,   16,   16,   16,  16,  16,   17]
         )
 
         for i in range(len(self.band)):
@@ -47,9 +47,9 @@ class MaskDecoder(nn.Module):
         super(MaskDecoder, self).__init__()
 
         self.band = torch.Tensor(
-            [8,  8,  8,  8,
-             16, 16, 16, 16,
-             32, 32, 32, 32, 33]
+        [2,    3,    3,    3,    3,   3,   3,    3,    3,    3,   3,
+         8,    8,    8,    8,    8,   8,   8,    8,    8,    8,   8,   8,
+         16,   16,   16,   16,   16,  16,  16,   17]
         )
 
         for i in range(len(self.band)):

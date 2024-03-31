@@ -92,7 +92,6 @@ class BSRNN(nn.Module):
             setattr(self, 'norm_t{}'.format(i + 1), nn.GroupNorm(1, num_channel))
             setattr(self, 'lstm_t{}'.format(i + 1), nn.LSTM(num_channel, 2 * num_channel, batch_first=True, bidirectional=False))
             setattr(self, 'fc_t{}'.format(i + 1), nn.Linear(2 * num_channel, num_channel))
-        # for i in range(self.num_layer):
             # K
             setattr(self, 'norm_k{}'.format(i + 1), nn.GroupNorm(1, num_channel))
             setattr(self, 'lstm_k{}'.format(i + 1), nn.LSTM(num_channel, 2 * num_channel, batch_first=True, bidirectional=True))
@@ -132,7 +131,6 @@ class BSRNN(nn.Module):
             out = getattr(self, 'fc_t{}'.format(i + 1))(out)
             out = out.reshape(B, K, T, N).transpose(1, 3)
             skip = skip + out
-        # for i in range(self.num_layer):
             # K
             out = getattr(self, 'norm_k{}'.format(i + 1))(skip)
             out = out.permute(0, 2, 3, 1).contiguous().reshape(B * T, K, N)

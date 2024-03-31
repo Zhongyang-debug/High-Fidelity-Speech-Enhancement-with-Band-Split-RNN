@@ -5,6 +5,8 @@ import random
 from natsort import natsorted
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 import librosa
+from torch.utils.data.distributed import DistributedSampler
+
 
 class DemandDataset(torch.utils.data.Dataset):
     def __init__(self, data_dir, cut_len=16000*2):
@@ -48,17 +50,30 @@ class DemandDataset(torch.utils.data.Dataset):
         return clean_ds, noisy_ds, length
 
 
-def load_data(ds_dir, batch_size, n_cpu, cut_len):
-#     torchaudio.set_audio_backend("sox_io")         # in linux
+def load_data(ds_dir, batch_size, n_cpu, cut_len, rank):
+
+    # torchaudio.set_audio_backend("sox_io")         # in linux
+
     train_dir = os.path.join(ds_dir, 'train')
     test_dir = os.path.join(ds_dir, 'test')
 
     train_ds = DemandDataset(train_dir, cut_len)
     test_ds = DemandDataset(test_dir, cut_len)
-
-    train_dataset = torch.utils.data.DataLoader(dataset=train_ds, batch_size=batch_size, shuffle=True,
-                                                drop_last=True, num_workers=n_cpu)
-    test_dataset = torch.utils.data.DataLoader(dataset=test_ds, batch_size=batch_size, shuffle=False,
-                                               drop_last=False, num_workers=n_cpu)
+    train_sampler = DistributedSampler(dataset=train_ds, rank=rank) if torch.cuda.device_count() > 1 else None
+    test_sampler = DistributedSampler(dataset=test_ds, rank=rank) if torch.cuda.device_count() > 1 else None
+    train_dataset = torch.utils.data.DataLoader(dataset=train_ds,
+                                                batch_size=batch_size,
+                                                shuffle=False if torch.cuda.device_count() > 1 else True,
+                                                sampler=train_sampler,
+                                                pin_memory=True if torch.cuda.is_available() else False,
+                                                drop_last=True,
+                                                num_workers=n_cpu)
+    test_dataset = torch.utils.data.DataLoader(dataset=test_ds,
+                                               batch_size=batch_size,
+                                               shuffle=False,
+                                               sampler=test_sampler,
+                                               pin_memory=True if torch.cuda.is_available() else False,
+                                               drop_last=False,
+                                               num_workers=n_cpu)
 
     return train_dataset, test_dataset

@@ -4,7 +4,7 @@
 **相关领域应用情况**
 
 **音乐源分离**：
-[Music Source Separation with Band-split RNN](https://arxiv.org/abs/2209.15174)
+[Music Source Separation with Band-Split RNN](https://arxiv.org/abs/2209.15174)
 
 **语音增强**：
 [High Fidelity Speech Enhancement with Band-Split RNN](https://arxiv.org/abs/2212.00406)

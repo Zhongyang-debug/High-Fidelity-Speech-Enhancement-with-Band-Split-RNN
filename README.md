@@ -23,4 +23,4 @@
 
 https://github.com/sungwon23/BSRNN （调整 DPRNN 排列方式）
 
-https://github.com/ruizhecao96/CMGAN （Metric GAN）
+https://github.com/ruizhecao96/CMGAN （Metric GAN 学习客观评价指标）
